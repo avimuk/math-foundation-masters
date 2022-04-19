@@ -84,12 +84,19 @@ if __name__ == "__main__":
         else:
             gd_flag=False
 
-    rows = int(ph_n[:2])
-    cols = int(ph_n[2:])
+    rows = ph_n[:2]
+    cols = ph_n[2:]
 
-    if(rows ==0 or cols==0):
-        print("Error: Zero matrix size not allowed... Re-run with non-zero matrix size")
+    if (int(rows) == 0 or int(cols) == 0):
+        print("Error: Zero matrix size not 010allowed... Re-run with non-zero matrix size")
         exit(1)
+
+    rows = rows.replace("0","3")
+    cols = cols.replace("0","3")
+
+    rows = int(rows)
+    cols = int(cols)
+
     # Input data format r.dddd
     d = 4
     """

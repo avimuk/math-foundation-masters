@@ -53,7 +53,7 @@ def call_critical_point(x_der, y_der):
         except RuntimeWarning as  e:
             print(f"\n[Warning] Opps ! fsolve is unable to optimize solution for cn(1,1)..Try another number")
             exit(1)
-    print(f"\nfsolve successfully calculated cp(1,1)")
+    #print(f"\nfsolve successfully calculated cp(1,1)")
     zGuess = np.array([-1, -1])
     with warnings.catch_warnings():
         warnings.filterwarnings('error')
@@ -63,7 +63,7 @@ def call_critical_point(x_der, y_der):
         except RuntimeWarning as  e:
             print(f"\n[Warning]Opps ! fsolve is unable to optimize solution for cn(-1,-1)..Try another number")
             exit(1)
-    print(f"fsolve sucessfully calculated cn(-1,-1)")
+    #print(f"fsolve sucessfully calculated cn(-1,-1)")
     return cp,cn
 
 def Get_Critical_Point(p):

@@ -20,6 +20,61 @@ def round_s(n, dp=0):
     else:
         return (float(str(n_5s)[0:dp]))
 
+def get_norm_all(A,m,n,ds):
+    """
+      Calculate all norms
+
+      input: A is an m x n  coefficient matrix
+             m # of rows
+             n # of cols
+             ds decimal point
+      output: L-Frobenius normal form value
+      """
+
+    #rows m and columns n, for square matrix its same
+
+    #Frobenius norm
+    f = 0
+    for i in np.arange(m):
+        for j in np.arange(n):
+            f = f + np.sum(np.power(np.abs(A[i, j]), 2))
+
+    r=round_s(float(np.sqrt(f)),ds)
+    print(f"\nL-Frobenius norm for the matrix is: {r}\n")
+
+    #print(np.sqrt(np.sum(np.abs(A) ** 2)))
+    #print(np.linalg.norm(A, 'fro'))
+
+    print(f"Other optional norms for verification")
+
+    #L2
+    r= round_s(float(np.sqrt(np.max(np.linalg.eigvals(np.inner(A, A))))),ds)
+    print(f"L2 norm is: {r}")
+
+    #print(np.linalg.norm(A, 2))
+
+    #L-infinity
+    rowsums = []
+    for i in np.arange(m):
+        v = np.sum(np.absolute(A[i, :]))
+        rowsums.append(v)
+    r=round_s(float(np.max(rowsums)),ds)
+    print(f"L-infinity norm is: {r}")
+
+    #print(np.max(np.sum(np.abs(A), axis=1)))
+    #print(np.linalg.norm(A, np.inf))
+
+    #L1
+    columns = []
+    for i in np.arange(n):
+        v = np.sum(np.abs(A[:, i]))
+        columns.append(v)
+    r=round_s(float(np.max(columns)),ds)
+    print(f"L1 norm is: {r}")
+
+    #print(np.max(np.sum(np.abs(A), axis=0)))
+    #print(np.linalg.norm(A, 1))
+
 
 def check_gs(A, m, n, ds):
     """
@@ -53,6 +108,11 @@ def gram_schmidt(A):
 
         if np.array_equal(q, np.zeros(q.shape)):
             raise np.linalg.LinAlgError("The column vectors are not linearly independent")
+
+
+        norm =np.sqrt(np.dot(q, q))
+        (g,h) = len(q),q[0].size
+        get_norm_all(q,g,h,ds)
 
         # normalize q
         q = q / np.sqrt(np.dot(q, q))
@@ -127,6 +187,7 @@ if __name__ == "__main__":
                 exit(1)
     print("\nOrthogonal matrix Q from input matrix")
     print("---------------------------------------")
+
     q= gram_schmidt(A_mat)
     print(q)
 

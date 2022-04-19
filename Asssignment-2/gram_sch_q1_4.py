@@ -52,7 +52,7 @@ def get_norm_all(A,m,n,ds):
     print(f"Other optional norms for verification")
 
     #L2
-    r= round_s(float(np.sqrt(np.max(np.linalg.eigvals(np.inner(A, A))))),ds)
+    r= np.sqrt(np.max(np.linalg.eigvals(np.inner(A, A))))
     print(f"L2 norm is: {r}")
 
     #print(np.linalg.norm(A, 2))
